@@ -6,7 +6,7 @@ import os
 
 st.set_page_config(page_title="Scalable Anonymizer with Decryption")
 
-# Load or generate encryption key
+# generate encryption key
 key_file = "fernet.key"
 if os.path.exists(key_file):
     with open(key_file, "rb") as f:
@@ -18,7 +18,7 @@ else:
 
 fernet = Fernet(key)
 
-# Load or create mapping file
+# create mapping file
 map_file = "anonymization_map.json"
 if os.path.exists(map_file):
     with open(map_file, "r") as f:
@@ -29,8 +29,7 @@ else:
 # Invert map for decryption
 inverse_map = {v: k for k, v in anon_map.items()}
 
-# UI
-st.title("🔐 Scalable Column Anonymizer + Decryptor")
+st.subheader("🔐 Scalable Column Anonymizer + Decryptor")
 uploaded_file = st.file_uploader("📂 Upload your dataset (CSV)", type="csv")
 
 if uploaded_file is not None:
